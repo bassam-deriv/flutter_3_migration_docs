@@ -1,5 +1,9 @@
 # Upgrading Flutter Multipliers
 
+This document contains the list of changes that need to be made to upgrade the `flutter-multipliers` project to the `3.10.1` version of Flutter.
+
+We also prepared a list of articles/resources that may be helpful to learn about new amazing things in Dart 3.0 that comes with this upgrade [here](dart_3_things.md).
+
 ## Errors and Warnings
 
 - Import conflict with `lib/core/presentation/widgets/badge.dart` and `material.dart`. We must use `as` prefix to avoid this conflict.
@@ -26,7 +30,7 @@
     ```
 - `channel.setMockMethodCallHandler` is deprecated and shouldn't be used: Replace it with `TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler`
 
-    ```
+    ```dart
     //Before:
     setUp(() {
         channel.setMockMethodCallHandler((MethodCall methodCall) async {
@@ -48,6 +52,20 @@
 ## Analysis Options
 
 - `implicit-dynamic` is removed.
+  ```yaml
+  // Before
+  analyzer:
+    strong-mode:
+      implicit-casts: false
+      implicit-dynamic: false
+
+  // After
+  analyzer:
+    language:
+      strict-casts: true
+      strict-raw-types: true
+  ```
+
 - `prefer_equal_for_default_values` is removed.
 
 
